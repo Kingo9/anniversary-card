@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary, My Chinki ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+    }
+
+    /* Background Slideshow */
+    .slideshow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .slideshow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 2;
+    }
+    
+    .slideshow img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: all 2s ease-in-out;
+        filter: blur(2px) brightness(0.6);
+    }
+    
+    .slideshow img.active {
+        opacity: 1;
+    }
+
+    /* Floating particles */
+    .particle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 3;
+    }
+    
+    .heart {
+        color: #ff6b9d;
+        font-size: 20px;
+        animation: floatHeart 8s linear infinite;
+    }
+    
+    .sparkle {
+        color: #ffd700;
+        font-size: 16px;
+        animation: floatSparkle 6s linear infinite;
+    }
+    
+    @keyframes floatHeart {
+        0% { 
+            transform: translateY(100vh) rotate(0deg) scale(0.5); 
+            opacity: 0; 
+        }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { 
+            transform: translateY(-20vh) rotate(360deg) scale(1.2); 
+            opacity: 0; 
+        }
+    }
+    
+    @keyframes floatSparkle {
+        0% { 
+            transform: translateY(100vh) rotate(0deg) scale(0.3); 
+            opacity: 0; 
+        }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { 
+            transform: translateY(-20vh) rotate(720deg) scale(1); 
+            opacity: 0; 
+        }
+    }
+
+    /* Card Container */
+    .card-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        perspective: 1000px;
+    }
+
+    /* Interactive Card */
+    .anniversary-card {
+        width: 450px;
+        height: 600px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        animation: cardEntrance 2s ease-out forwards;
+    }
+    
+    @keyframes cardEntrance {
+        0% {
+            transform: rotateY(-180deg) scale(0.3);
+            opacity: 0;
+        }
+        50% {
+            transform: rotateY(-90deg) scale(0.7);
+            opacity: 0.5;
+        }
+        100% {
+            transform: rotateY(0deg) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .anniversary-card.flipped {
+        transform: rotateY(180deg);
+    }
+    
+    .anniversary-card:hover.flipped {
+        transform: translateY(-10px) scale(1.02) rotateY(180deg);
+    }
+
+    .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px;
+    }
+
+    /* Front of Card */
+    .card-front {
+        background: linear-gradient(145deg, #fff 0%, #f8f9ff 100%);
+        border: 3px solid #ff6b9d;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-front::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+        animation: shimmer 4s ease-in-out infinite alternate;
+    }
+    
+    @keyframes shimmer {
+        0% { transform: rotate(0deg) scale(1); }
+        100% { transform: rotate(10deg) scale(1.1); }
+    }
+
+    .front-title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 3.2em;
+        font-weight: 700;
+        color: #d63384;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        line-height: 1.2;
+        z-index: 2;
+        position: relative;
+    }
+
+    .front-subtitle {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #6c757d;
+        font-style: italic;
+        z-index: 2;
+        position: relative;
+    }
+    
+    .click-hint {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9em;
+        color: #ff6b9d;
+        opacity: 0.8;
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+        50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
+    /* Back of Card */
+    .card-back {
+        background: linear-gradient(145deg, #fff5f8 0%, #ffe8ed 100%);
+        border: 3px solid #d63384;
+        transform: rotateY(180deg);
+        padding: 30px;
+        justify-content: flex-start;
+    }
+
+    .back-content {
+        text-align: left;
+        line-height: 1.8;
+        color: #495057;
+        font-size: 1.1em;
+        font-weight: 400;
+    }
+    
+    .back-content p {
+        margin-bottom: 15px;
+    }
+    
+    .back-content p:last-child {
+        margin-top: 25px;
+        font-weight: 600;
+        color: #d63384;
+        text-align: center;
+        font-style: italic;
+    }
+
+    /* Decorative elements */
+    .decorative-corner {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, #ff6b9d 30%, transparent 30%);
+        background-size: 8px 8px;
+        opacity: 0.3;
+    }
+    
+    .corner-1 { top: 10px; left: 10px; }
+    .corner-2 { top: 10px; right: 10px; }
+    .corner-3 { bottom: 10px; left: 10px; }
+    .corner-4 { bottom: 10px; right: 10px; }
+
+    /* Hover effects */
+    .anniversary-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .anniversary-card {
+            width: 350px;
+            height: 500px;
+        }
+        
+        .front-title {
+            font-size: 2.5em;
+        }
+        
+        .front-subtitle {
+            font-size: 1.2em;
+        }
+        
+        .card-face {
+            padding: 25px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <!-- Images will be added dynamically with JavaScript -->
+    </div>
+
+    <!-- Particles Container -->
+    <div id="particles-container"></div>
+
+    <!-- Card Container -->
+    <div class="card-container">
+        <div class="anniversary-card" id="card">
+            <!-- Front of Card -->
+            <div class="card-face card-front">
+                <div class="decorative-corner corner-1"></div>
+                <div class="decorative-corner corner-2"></div>
+                <div class="decorative-corner corner-3"></div>
+                <div class="decorative-corner corner-4"></div>
+                
+                <h1 class="front-title">Happy Anniversary,<br>My Chinki ❤️</h1>
+                <p class="front-subtitle">Another year, same love… only stronger.</p>
+                
+                <div class="click-hint">Click to open ↓</div>
+            </div>
+            
+            <!-- Back of Card -->
+            <div class="card-face card-back">
+                <div class="back-content">
+                    <p>From the moment we met,<br>my life found its missing piece.</p>
+                    
+                    <p>We've laughed, we've grown,<br>and we've loved in ways I never thought possible.</p>
+                    
+                    <p>Today isn't just a date —<br>it's a reminder of every little reason<br>I'm grateful to call you mine. 💕</p>
+                    
+                    <p>Here's to us —<br>our past, our present, and our forever.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get image elements
+        const images = [
+            "IMG-20250809-WA0049.jpg",
+            "IMG-20250809-WA0050.jpg",
+            "IMG-20250809-WA0051.jpg",
+            "IMG-20250809-WA0052.jpg",
+            "IMG-20250809-WA0053.jpg",
+            "IMG-20250809-WA0054.jpg",
+            "IMG-20250809-WA0055.jpg",
+            "IMG-20250809-WA0056.jpg",
+            "IMG-20250809-WA0057.jpg",
+            "IMG-20250809-WA0058.jpg",
+            "IMG-20250809-WA0059.jpg",
+            "WhatsApp Image 2025-08-09 at 22.17.27_58751b2c.jpg"
+        ];
+
+        // Slideshow functionality
+        const slideshow = document.getElementById('slideshow');
+        
+        // Add images to slideshow
+        images.forEach((imgSrc, index) => {
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.className = index === 0 ? 'active' : '';
+            img.onerror = function() {
+                console.log('Failed to load image:', imgSrc);
+                this.style.display = 'none';
+            };
+            slideshow.appendChild(img);
+        });
+        
+        // Start slideshow
+        const slideElements = document.querySelectorAll('.slideshow img');
+        let currentSlide = 0;
+        
+        function changeSlide() {
+            slideElements[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slideElements.length;
+            slideElements[currentSlide].classList.add('active');
+        }
+        
+        // Change slides every 5 seconds
+        setInterval(changeSlide, 5000);
+        
+        // Card flip functionality
+        const card = document.getElementById('card');
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+        
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles-container');
+        const particleTypes = ['❤️', '✨', '💖', '💕'];
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Randomly select particle type
+            const type = Math.random() < 0.7 ? 'heart' : 'sparkle';
+            particle.classList.add(type);
+            
+            // Set content based on type
+            if (type === 'heart') {
+                particle.innerHTML = particleTypes[Math.floor(Math.random() * 3)]; // Hearts
+            } else {
+                particle.innerHTML = particleTypes[3]; // Sparkles
+            }
+            
+            // Random position
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            // Random animation duration
+            const duration = (Math.random() * 3 + 5);
+            particle.style.animationDuration = duration + 's';
+            
+            // Add to container
+            particlesContainer.appendChild(particle);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+        
+        // Create particles at random intervals
+        setInterval(createParticle, 300);
+        
+        // Create initial batch of particles
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createParticle, Math.random() * 2000);
+        }
+    </script>
+</body>
+</html>
