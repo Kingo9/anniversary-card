@@ -91,13 +91,13 @@
     }
 
     .card {
-        width: 320px;
-        height: 420px;
+        width: 280px;
+        height: 360px;
         position: relative;
         transform-style: preserve-3d;
         transition: transform 0.8s;
         cursor: pointer;
-        border-radius: 20px;
+        border-radius: 15px;
     }
 
     .card.is-flipped {
@@ -115,7 +115,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 25px;
+        padding: 20px;
         text-align: center;
     }
 
@@ -132,25 +132,25 @@
         transform: rotateY(180deg);
         color: #495057;
         justify-content: flex-start;
-        padding: 30px 25px;
+        padding: 25px 20px;
     }
 
     .front-title {
         font-family: 'Dancing Script', cursive;
-        font-size: 2.2em;
+        font-size: 1.8em;
         font-weight: 700;
         color: #d63384;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         line-height: 1.2;
     }
 
     .front-subtitle {
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 300;
         color: #6c757d;
         font-style: italic;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     .click-hint {
@@ -169,8 +169,8 @@
 
     .back-content {
         text-align: left;
-        line-height: 1.6;
-        font-size: 0.9em;
+        line-height: 1.5;
+        font-size: 0.8em;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -178,11 +178,11 @@
     }
     
     .back-content p {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     
     .back-content p:last-child {
-        margin-top: 20px;
+        margin-top: 15px;
         font-weight: 600;
         color: #d63384;
         text-align: center;
@@ -199,23 +199,56 @@
         opacity: 0.7;
     }
 
-    /* Responsive */
+    /* Mobile Responsive */
     @media (max-width: 768px) {
         .card {
-            width: 320px;
-            height: 450px;
+            width: 260px;
+            height: 340px;
         }
         
         .front-title {
-            font-size: 2.2em;
+            font-size: 1.6em;
         }
         
         .front-subtitle {
-            font-size: 1.1em;
+            font-size: 0.85em;
         }
         
         .card-face {
-            padding: 25px;
+            padding: 18px;
+        }
+        
+        .back-content {
+            font-size: 0.75em;
+            line-height: 1.4;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .card {
+            width: 240px;
+            height: 320px;
+        }
+        
+        .front-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .front-subtitle {
+            font-size: 0.8em;
+        }
+        
+        .card-face {
+            padding: 15px;
+        }
+        
+        .back-content {
+            font-size: 0.7em;
+        }
+        
+        .back-content p {
+            margin-bottom: 8px;
         }
     }
 </style>
